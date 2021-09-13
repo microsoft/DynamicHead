@@ -25,7 +25,7 @@ class concat_feature_maps(nn.Module):
                 level = F.interpolate(input=level, size=(median_height, median_height),mode='nearest')
             # If level height is less than median, then upsample
             else:
-                level = F.upsample(input=level, size=(median_height, median_height), mode='nearest')
+                level = F.interpolate(input=level, size=(median_height, median_height), mode='nearest')
             level_tensors[i] = level
         
         # Concating all levels with dimensions (batch_size, levels, C, H, W)

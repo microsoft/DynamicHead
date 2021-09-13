@@ -80,11 +80,11 @@ class Spatial_Aware_Layer(nn.Module):
         offsets_and_masks = self.offset_and_mask_conv(F)
 
         # Separating offsets and masks as described in Deform Conv v2 paper
-        offsets = offsets_and_masks[:, :2*self.K, :, :] # First 2K channels 
-        masks = torch.sigmoid(offsets_and_masks[:, 2*self.K:, : , :]) # Last 1K channels and passing it through sigmoid
+        offset = offsets_and_masks[:, :2*self.K, :, :] # First 2K channels 
+        mask = torch.sigmoid(offsets_and_masks[:, 2*self.K:, : , :]) # Last 1K channels and passing it through sigmoid
 
-        # Passing both offsets, masks, and F into deform conv layer
-        spacial_output = self.deform_conv(F, offsets, masks)
+        # Passing offsets, masks, and F into deform conv layer
+        spacial_output = self.deform_conv(F, offset, mask)
         return spacial_output
 
 # DyReLUA technique from Dynamic ReLU paper
