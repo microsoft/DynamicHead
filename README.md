@@ -56,3 +56,19 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+------
+# My Notes
+
+Hi there, I am a recent undergrad graduate and am currently looking for ML positions. I always wanted to learn how to implement code from a paper, and I was happy to implement the DyHead attachment that can be used by others. 
+
+All the code I wrote uses PyTorch, these are all the modules:
+1. [`concat_fpn_features.py`](./torch/concat_fpn_output.py) - This takes all the output of the FPN and concatenates all the levels to the median height and width of all the levels via upsampling or downsampling.
+2. [`attention_layers.py`](./torch/attention_layers.py) - This contains all the classes for the three attention mechanisms.
+3. [`DyHead.py`](./torch/DyHead.py) - This contains the classes to construct a single DyHead block or the entire DyHead.
+
+The code used is not the most efficient, but the code is well documented and easily understandable. However, I am sure changes to make it more efficient is not a problem.
+
+## Future Additions:
+The code does not contruct a full Object Detection model with a DyHead. This is the case because I currently need to change my focus on to just find a new position but also I was confused about the implementation of ROI Pooling on the F since dimensions do not contain the spacial dimensions since it was reshaped to be LxSxC not LxHxWxC. I would like to hear more about how this is implemented.
+
+So in the future when I have more time and a better understanding, I would like to implement both one-stage and two-stage detectors using PyTorch's Buit-in FasterRCNN modules to easily adapt the inclusion of DyHead for detection purposes.
