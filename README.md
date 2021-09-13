@@ -66,6 +66,8 @@ All the code I wrote uses PyTorch, these are all the modules:
 2. [`attention_layers.py`](./torch/attention_layers.py) - This contains all the classes for the three attention mechanisms.
 3. [`DyHead.py`](./torch/DyHead.py) - This contains the classes to construct a single DyHead block or the entire DyHead.
 
+The [`DyHead_Example.ipynb`](./torch/DyHead_Example.ipynb) notebook demonstrates how all the classes above work, I would encourage to have a look.
+
 The code used is not the most efficient, but the code is well documented and easily understandable. However, I am sure changes to make it more efficient is not a problem.
 
 ## Future Additions:
