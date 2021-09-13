@@ -64,7 +64,7 @@ Hi there, I am a recent undergrad graduate and am currently looking for ML posit
 All the code I wrote uses PyTorch, these are all the modules:
 1. [`concat_fpn_features.py`](./torch/concat_fpn_output.py) - This takes all the output of the FPN and concatenates all the levels to the median height and width of all the levels via upsampling or downsampling.
 2. [`attention_layers.py`](./torch/attention_layers.py) - This contains all the classes for the three attention mechanisms.
- - Big Thanks to user Github [Islanna](https://github.com/Islanna/), she implemented code from the [Dynamic ReLU Paper](https://arxiv.org/pdf/2003.10027.pdf). The Task-aware Attention layer uses the same technique from Dynamic-ReLU-A that constructs a dynamic ReLU funtion that are both spatial and channel shared. I used her code as a way to understand how to implement it and I used the same techniques but made the code simpler for my own learning process, but all credits to her.
+ - Big Thanks to user Github [Islanna](https://github.com/Islanna/), she implemented code from the [Dynamic ReLU Paper](https://arxiv.org/pdf/2003.10027.pdf). The Task-aware Attention layer uses the same technique from Dynamic-ReLU-A that constructs a dynamic ReLU funtion that are both spatial and channel shared. I used her code as a way to understand how to implement it and I used the same techniques but made the code simpler for my own learning process, but all credits to her. This is her repository: https://github.com/Islanna/DynamicReLU.
 
 4. [`DyHead.py`](./torch/DyHead.py) - This contains the classes to construct a single DyHead block or the entire DyHead.
 
