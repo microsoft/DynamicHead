@@ -21,10 +21,46 @@ By coherently combining multiple self-attention mechanisms between feature level
 >[Xiyang Dai](https://scholar.google.com/citations?user=QC8RwcoAAAAJ&hl=en), [Yinpeng Chen](https://scholar.google.com/citations?user=V_VpLksAAAAJ&hl=en), [Bin Xiao](https://scholar.google.com/citations?user=t5HZdzoAAAAJ&hl=en), [Dongdong Chen](https://scholar.google.com/citations?user=sYKpKqEAAAAJ&hl=zh-CN), [Mengchen Liu](https://scholar.google.com/citations?user=cOPQtYgAAAAJ&hl=zh-CN), [Lu Yuan](https://scholar.google.com/citations?user=k9TsUVsAAAAJ&hl=en), [Lei Zhang](https://scholar.google.com/citations?user=fIlGZToAAAAJ&hl=en) 
 
 
-
 ### Model Zoo
 
-Code and Model are under internal review and will release soon. Stay tuned!
+~~Code and Model are under internal review and will release soon. Stay tuned!~~
+
+In order to open-source, we have ported the implementation from our internal framework to Detectron2 and re-train the models.
+
+We notice better performances on some models compared to original paper.
+
+| Config                                                                       |           Model         |   Backbone  | Scheduler | COCO mAP |  Weight                                                                                |       
+|------------------------------------------------------------------------------|-------------------------|-------------|-----------|----------|----------------------------------------------------------------------------------------|                                                                                                                                                      
+|  [cfg](configs/dyhead_r50_rcnn_fpn_1x.yaml)                                  |    FasterRCNN + DyHead  |   R50       | 1x        | 40.3     |  [weight](https://xiyang.blob.core.windows.net/public/dyhead_r50_rcnn_fpn_1x.pth)      |       
+|  [cfg](configs/dyhead_r50_retina_fpn_1x.yaml)                                |    RetinaNet + DyHead   |   R50       | 1x        | 39.9     |  [weight](https://xiyang.blob.core.windows.net/public/dyhead_r50_retina_fpn_1x.pth)    |            
+|  [cfg](configs/dyhead_r50_atss_fpn_1x.yaml)                                  |    ATSS + DyHead        |   R50       | 1x        | 42.4     |  [weight](https://xiyang.blob.core.windows.net/public/dyhead_r50_atss_fpn_1x.pth)      |   
+|  [cfg](configs/dyhead_swint_atss_fpn_2x_ms.yaml)                             |    ATSS + DyHead        |   Swin-Tiny | 2x + ms   | 49.8     |  [weight](https://xiyang.blob.core.windows.net/public/dyhead_swint_atss_fpn_2x_ms.pth) |    
+
+
+### Usage
+**Dependencies:**
+
+[Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html), [timm](https://rwightman.github.io/pytorch-image-models/)
+
+**Installation:**
+
+```
+python -m pip install -e DynamicHead
+```
+
+**Train:**
+
+To train a config on a single node with 8 gpus, simply use:
+```
+DETECTRON2_DATASETS=$DATASET python train_net.py --config configs/dyhead_r50_retina_fpn_1x.yaml --num-gpus 8
+```
+
+**Test:**
+
+To test a config with a weight on a single node with 8 gpus, simply use:
+```
+DETECTRON2_DATASETS=$DATASET python train_net.py --config configs/dyhead_r50_retina_fpn_1x.yaml --num-gpus 8 --eval-only MODEL.WEIGHTS $WEIGHT
+```
 
 
 ### Citation

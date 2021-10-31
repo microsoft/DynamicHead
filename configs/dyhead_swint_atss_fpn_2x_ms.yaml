@@ -1,0 +1,34 @@
+MODEL:
+  META_ARCHITECTURE: "ATSS"
+  WEIGHTS: "swin_tiny_patch4_window7_224_d2.pth"
+  PIXEL_MEAN: [123.675, 116.28, 103.53]
+  PIXEL_STD: [58.395, 57.12, 57.375]
+  BACKBONE:
+    NAME: "build_retinanet_swint_fpn_dyhead_backbone"
+  SWINT:
+    OUT_FEATURES: ["stage3", "stage4", "stage5"]
+  FPN:
+    IN_FEATURES: ["stage3", "stage4", "stage5"]
+  DYHEAD:
+    NUM_CONVS: 6
+    CHANNELS: 256
+  ANCHOR_GENERATOR:
+    SIZES: !!python/object/apply:eval ["[[x*2,] for x in [32, 64, 128, 256, 512 ]]"]
+    ASPECT_RATIOS: [1.0,]
+    OFFSET: 0.5
+  ATSS:
+    NUM_CONVS: 0
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+SOLVER:
+  IMS_PER_BATCH: 32
+  BASE_LR: 0.0001
+  WEIGHT_DECAY: 0.05
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+  OPTIMIZER: "ADAMW"
+INPUT:
+  FORMAT: "RGB"
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+VERSION: 2

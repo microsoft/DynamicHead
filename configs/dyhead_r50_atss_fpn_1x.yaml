@@ -1,0 +1,28 @@
+MODEL:
+  META_ARCHITECTURE: "ATSS"
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  BACKBONE:
+    NAME: "build_retinanet_resnet_fpn_dyhead_backbone"
+  RESNETS:
+    DEPTH: 50
+    OUT_FEATURES: ["res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res3", "res4", "res5"]
+  DYHEAD:
+    NUM_CONVS: 6
+    CHANNELS: 256
+  ANCHOR_GENERATOR:
+    SIZES: !!python/object/apply:eval ["[[x*2,] for x in [32, 64, 128, 256, 512 ]]"]
+    ASPECT_RATIOS: [1.0,]
+    OFFSET: 0.5
+  ATSS:
+    NUM_CONVS: 0
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.01
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+VERSION: 2
